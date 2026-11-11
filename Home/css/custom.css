@@ -1,0 +1,160 @@
+/* Neston Nails – small visual polish on top of the original site styles. */
+
+:root {
+  --nn-brand: #873403;
+  --nn-brand-dark: #6a2802;
+  --nn-soft: #fff4ec;
+  --nn-radius: 14px;
+  --nn-shadow: 0 10px 30px rgba(73, 32, 8, 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The old chat bubble was linked to another website's account and did not work. */
+.widget-messaging {
+  display: none !important;
+}
+
+/* Banner and promo images: rounded corners and a soft shadow */
+.widget-header figure img,
+.widget-gift-card img {
+  border-radius: var(--nn-radius);
+  box-shadow: var(--nn-shadow);
+}
+
+/* Price list: show the £ sign and make prices stand out */
+[data-aid^="MENU_SECTION"][data-aid$="_PRICE"] {
+  font-weight: 700;
+  color: var(--nn-brand);
+  white-space: nowrap;
+}
+[data-aid^="MENU_SECTION"][data-aid$="_PRICE"]::before {
+  content: "£";
+}
+
+/* Price list rows: gentle highlight on hover */
+[data-aid^="MENU_ITEM_"]:not([data-aid^="MENU_ITEM_CONTAINER"]) {
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+[data-aid^="MENU_ITEM_"]:not([data-aid^="MENU_ITEM_CONTAINER"]):hover {
+  background-color: var(--nn-soft);
+}
+
+/* Gallery: smooth zoom on hover */
+.widget-gallery img {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.widget-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--nn-shadow);
+}
+
+/* Gallery on phones: two columns instead of one long list */
+@media (max-width: 600px) {
+  body .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  body .gallery img {
+    height: 190px;
+  }
+}
+
+/* Buttons: subtle lift on hover */
+[data-ux-btn] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+[data-ux-btn]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(73, 32, 8, 0.22);
+  filter: brightness(1.05);
+}
+
+/* Map: the original box was shorter than the map, so the map spilled
+   over the reviews heading below it. Let the box grow with the map. */
+[data-ux="MapBanner"] {
+  height: auto !important;
+  min-height: 0 !important;
+  padding-bottom: 24px !important;
+}
+[data-ux="MapBanner"] [data-ux="Block"] {
+  position: static !important;
+  height: auto !important;
+}
+[data-aid="CONTACT_MAP_REND"] iframe {
+  display: block;
+}
+
+/* Contact block (replaces the old form that could not send messages) */
+.nn-contact {
+  padding: 28px;
+  border-radius: var(--nn-radius);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: var(--nn-shadow);
+}
+.nn-contact__title {
+  margin: 0 0 8px;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #1b1b1b;
+}
+.nn-contact__text {
+  margin: 0 0 20px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #444;
+}
+.nn-contact__actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.nn-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 18px;
+  border: 2px solid var(--nn-brand);
+  border-radius: 48px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  color: var(--nn-brand);
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.nn-btn:hover,
+.nn-btn:focus-visible {
+  background: var(--nn-brand);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.nn-btn--primary {
+  background: var(--nn-brand);
+  color: #fff;
+}
+.nn-btn--primary:hover,
+.nn-btn--primary:focus-visible {
+  background: var(--nn-brand-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .widget-gallery img,
+  [data-ux-btn],
+  .nn-btn { transition: none; }
+  .widget-gallery img:hover,
+  [data-ux-btn]:hover,
+  .nn-btn:hover { transform: none; }
+}
