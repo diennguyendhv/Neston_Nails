@@ -53,6 +53,37 @@ html {
   box-shadow: var(--nn-shadow);
 }
 
+/* Christmas offer + greeting card at the bottom of the home page */
+.nn-offers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+.nn-offers__item {
+  display: block;
+  border-radius: var(--nn-radius);
+  overflow: hidden;
+  box-shadow: var(--nn-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+a.nn-offers__item:hover,
+a.nn-offers__item:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(73, 32, 8, 0.22);
+}
+.nn-offers__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .nn-offers {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
 /* Gallery on phones: two columns instead of one long list */
 @media (max-width: 600px) {
   body .gallery {
